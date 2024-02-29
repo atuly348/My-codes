@@ -1,0 +1,100 @@
+package inheri;
+
+class Account {
+	private long accno;
+	private String name;
+	private String Address;
+	private long phno;
+	private String dob;
+	private long balance;
+
+	public Account(long accno, String name, String Address, long phno, String dob, long balance) {
+		this.accno = accno;
+		this.name = name;
+		this.Address = Address;
+		this.phno = phno;
+		this.dob = dob;
+		this.balance = balance;
+	}
+
+	public long getAccno() {
+		return accno;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public long getPhno() {
+		return phno;
+	}
+
+	public long getBalance() {
+		return balance;
+	}
+
+	public void setBalance(long balance) {
+		this.balance = balance;
+	}
+}
+
+class SavingsAccount extends Account {
+
+	public SavingsAccount(long accno, String name, String Address, long phno, String dob, long balance) {
+		super(accno, name, Address, phno, dob, balance);
+
+	}
+
+	public void deposite(long depositAmt) {
+		long newAmt;
+		newAmt = depositAmt + getBalance();
+		setBalance(newAmt);
+		System.out.println("thank you for the deposite .Your current balance is " + getBalance());
+	}
+
+	public void withdraw(long withdrawAmt) {
+		long newAmt;
+		newAmt = getBalance() - withdrawAmt;
+		setBalance(newAmt);
+		System.out.println("thank you for the Withdraw .Your current balance is " + getBalance());
+	}
+
+	public void fixed(long fdAmt) {
+		long newAmt;
+		newAmt = getBalance() - fdAmt;
+		setBalance(newAmt);
+		System.out.println(
+				"thank you for the fixed deposite amount" + fdAmt + ".Your current balance is " + getBalance());
+	}
+}
+
+class LoanAccount extends SavingsAccount {
+
+	public LoanAccount(long accno, String name, String Address, long phno, String dob, long balance) {
+		super(accno, name, Address, phno, dob, balance);
+	}
+
+	public void loan(long emi) {
+		long newAmt;
+		newAmt = getBalance();
+
+		setBalance(newAmt - emi);
+		System.out.println("You paid your loan emi  .Your current balance is " + getBalance());
+	}
+
+}
+
+public class Bank {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		LoanAccount loanAccount = new LoanAccount(123456, "John Doe", "123 Main St", 9876543210L, "01/01/1990", 100);
+		loanAccount.deposite(3);
+		loanAccount.withdraw(2);
+		loanAccount.fixed(10);
+		loanAccount.loan(50);
+
+	}
+
+}
